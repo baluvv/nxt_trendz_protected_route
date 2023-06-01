@@ -1,0 +1,10 @@
+.not-found-container {
+  height: vh;
+  display: flex;
+  justify-content: center;
+}
+
+.not-found-heading {
+  font-family: 'Roboto';
+  font-size: 40px;
+}
