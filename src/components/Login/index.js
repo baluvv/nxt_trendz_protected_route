@@ -7,9 +7,12 @@ import './index.css'
 class Login extends Component {
   state = {username: 'rahul', password: 'rahul@2021'}
 
-  onSuccessLogin = jwtToken => {
-    Cookies.set('jwt_token', jwtToken, {expires: 30})
+  onSubmitSuccess = jwtToken => {
     const {history} = this.props
+
+    Cookies.set('jwt_token', jwtToken, {
+      expires: 30,
+    })
     history.replace('/')
   }
 
@@ -23,14 +26,15 @@ class Login extends Component {
     }
     const response = await fetch(url, options)
     const data = await response.json()
+    console.log(data)
     if (response.ok === true) {
-      this.onSuccessLogin(data.jwt_token)
+      this.onSubmitSuccess(data.jwt_token)
     }
   }
 
   render() {
-    const token = Cookies.get('jwt_token')
-    if (token !== undefined) {
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken !== undefined) {
       return <Redirect to="/" />
     }
     return (
